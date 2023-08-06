@@ -1,0 +1,30 @@
+version: '3.9'
+
+services:
+  authentication-frontend:
+    image: "authentication-frontend"
+    container_name: "authentication-frontend"
+    build: 
+      context: "."
+      target: "development"
+      dockerfile: "dockerfile"
+    environment:
+        BFF: "http://172.18.0.3/"
+    ports:
+    - "80:80"
+    volumes:
+    - "../http:/var/www/html"
+    - "../apache/000-default.conf:/etc/apache2/sites-available/000-default.conf"
+    - "../apache/apache2.conf:/etc/apache2/apache2.conf"
+    restart: always
+    networks:
+      dsousa:
+        ipv4_address: 172.18.0.2
+
+networks:
+  dsousa:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 172.18.0.0/16
+         gateway: 172.18.0.1
