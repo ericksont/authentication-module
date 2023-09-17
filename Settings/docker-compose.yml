@@ -1,9 +1,9 @@
 version: '3.9'
 
 services:
-  authentication-frontend:
-    image: "authentication-frontend"
-    container_name: "authentication-frontend"
+  authentication-module:
+    image: "authentication-module"
+    container_name: "authentication-module"
     build: 
       context: "."
       target: "development"
@@ -13,16 +13,16 @@ services:
     ports:
     - "80:80"
     volumes:
-    - "../http:/var/www/html"
-    - "../apache/000-default.conf:/etc/apache2/sites-available/000-default.conf"
-    - "../apache/apache2.conf:/etc/apache2/apache2.conf"
+    - "../Web:/var/www/html"
+    - "./apache/000-default.conf:/etc/apache2/sites-available/000-default.conf"
+    - "./apache/apache2.conf:/etc/apache2/apache2.conf"
     restart: always
     networks:
-      dsousa:
+      authentication-module:
         ipv4_address: 172.18.0.2
 
 networks:
-  dsousa:
+  authentication-module:
     driver: bridge
     ipam:
      config:
