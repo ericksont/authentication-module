@@ -23,8 +23,8 @@
             <section class="animate container login-form">
                 <h1> Autenticação </h1>
                 <form>
-                    <input type="text" placeholder="Username" />
-                    <input type="password" placeholder="Password" />
+                    <input type="text" id="user" placeholder="E-mail" />
+                    <input type="password" id="pass" placeholder="Senha" />
                     <div class="actions">
                         <a class="btn" href="javascript:;" onClick="authentication.login()">Entrar</a>
                         <a class="reset_pass" href="#request-pass">Esqueceu sua senha?</a>
@@ -42,7 +42,7 @@
             <section class="animate container request-pass">
                 <h1>Recuperar Senha</h1>
                 <form>
-                    <input type="email" placeholder="E-mail" />
+                    <input type="email" id="email" placeholder="E-mail" />
                     <a class="btn" href="#">Enviar</a>
                 </form>
                 <div class="separator">
