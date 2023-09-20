@@ -1,9 +1,9 @@
 version: '3.9'
 
 services:
-  authentication-module:
-    image: "authentication-module"
-    container_name: "authentication-module"
+  user-module:
+    image: "user-module"
+    container_name: "user-module"
     build: 
       context: "."
       target: "development"
@@ -18,11 +18,33 @@ services:
     - "./apache/apache2.conf:/etc/apache2/apache2.conf"
     restart: always
     networks:
-      authentication-module:
+      user-module:
         ipv4_address: 172.18.0.2
 
+  user-db:
+    image: "user-db"
+    container_name: "user-db"
+    build:
+        context: "."
+        target: "mariadb"
+        dockerfile: "dockerfile"
+    environment:
+        MYSQL_ROOT_PASSWORD: "abcd1234"
+        MYSQL_DATABASE: "user"
+        MYSQL_USER: "custom"
+        MYSQL_PASSWORD: "abcd1234"
+    ports:
+        - "3306:3036"
+    volumes:
+        - "../Database/Script:/docker-entrypoint-initdb.d"
+    restart: always
+    networks:
+      user-module:
+        ipv4_address: 172.18.0.3
+        
+
 networks:
-  authentication-module:
+  user-module:
     driver: bridge
     ipam:
      config:
