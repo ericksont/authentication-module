@@ -64,7 +64,7 @@ We thank the following people who contributed to this project:
 <table>
   <tr>
     <td align="center">
-      <a href="#">
+      <a href="https://github.com/ericksont">
         <img src="https://avatars.githubusercontent.com/u/11302299?s=96&v=4" width="100px;" alt="Photo by Erickson Tavares on GitHub"/><br>
         <sub>
           <b>Erickson Tavares</b>
