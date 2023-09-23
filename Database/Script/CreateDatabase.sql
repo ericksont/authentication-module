@@ -138,7 +138,7 @@ ENGINE = InnoDB;
 
 INSERT INTO projects_clients (id, project, client, status) VALUES (1, UNHEX(REPLACE('5a5c6a5d-4e14-4b45-b52b-c319f509c9d4', '-', '')), UNHEX(REPLACE('2a196187-c63a-4f5f-9f3c-738a348ea4d5', '-', '')), 1);
 INSERT INTO projects_clients (id, project, client, status) VALUES (2, UNHEX(REPLACE('5a5c6a5d-4e14-4b45-b52b-c319f509c9d4', '-', '')), UNHEX(REPLACE('ee0f7c48-e397-11ed-b5ea-0242ac120002', '-', '')), 1);
-INSERT INTO projects_clients (id, project, client, status) VALUES (2, UNHEX(REPLACE('6cf5a6a7-6d85-4c18-9c39-6fb01b9c4f4a', '-', '')), UNHEX(REPLACE('ee0f7c48-e397-11ed-b5ea-0242ac120002', '-', '')), 1);
+INSERT INTO projects_clients (id, project, client, status) VALUES (3, UNHEX(REPLACE('6cf5a6a7-6d85-4c18-9c39-6fb01b9c4f4a', '-', '')), UNHEX(REPLACE('ee0f7c48-e397-11ed-b5ea-0242ac120002', '-', '')), 1);
 
 CREATE TABLE IF NOT EXISTS `projects_roles_status` (
   `id` INT NOT NULL AUTO_INCREMENT,
@@ -172,10 +172,10 @@ CREATE TABLE IF NOT EXISTS `projects_roles` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-INSERT INTO projects_roles (id, name, label, project, status) VALUES (1, 'Administrator', 'ADM', UNHEX(REPLACE('5a5c6a5d-4e14-4b45-b52b-c319f509c9d4', 1);
-INSERT INTO projects_roles (id, name, label, project, status) VALUES (2, 'Developer', 'DEV', UNHEX(REPLACE('5a5c6a5d-4e14-4b45-b52b-c319f509c9d4', 1);
-INSERT INTO projects_roles (id, name, label, project, status) VALUES (3, 'Administrator', 'ADM', UNHEX(REPLACE('6cf5a6a7-6d85-4c18-9c39-6fb01b9c4f4a', 1);
-INSERT INTO projects_roles (id, name, label, project, status) VALUES (4, 'common user', 'CU', UNHEX(REPLACE('6cf5a6a7-6d85-4c18-9c39-6fb01b9c4f4a', 1);
+INSERT INTO projects_roles (id, name, label, project, status) VALUES (1, 'Administrator', 'ADM', UNHEX(REPLACE('5a5c6a5d-4e14-4b45-b52b-c319f509c9d4', '-', '')), 1);
+INSERT INTO projects_roles (id, name, label, project, status) VALUES (2, 'Developer', 'DEV', UNHEX(REPLACE('5a5c6a5d-4e14-4b45-b52b-c319f509c9d4', '-', '')), 1);
+INSERT INTO projects_roles (id, name, label, project, status) VALUES (3, 'Administrator', 'ADM', UNHEX(REPLACE('6cf5a6a7-6d85-4c18-9c39-6fb01b9c4f4a', '-', '')), 1);
+INSERT INTO projects_roles (id, name, label, project, status) VALUES (4, 'common user', 'CU', UNHEX(REPLACE('6cf5a6a7-6d85-4c18-9c39-6fb01b9c4f4a', '-', '')), 1);
 
 CREATE TABLE IF NOT EXISTS `users_projects` (
   `id` INT NOT NULL AUTO_INCREMENT,
@@ -211,8 +211,8 @@ CREATE TABLE IF NOT EXISTS `users_projects` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-INSERT INTO users_projects (id, user, status, project, role) VALUES (1, UNHEX(REPLACE('cbe386e3-3d70-4068-886a-1839ef342ebb', 1, UNHEX(REPLACE('5a5c6a5d-4e14-4b45-b52b-c319f509c9d4', 1);
-INSERT INTO users_projects (id, user, status, project, role) VALUES (2, UNHEX(REPLACE('cbe386e3-3d70-4068-886a-1839ef342ebb', 1, UNHEX(REPLACE('6cf5a6a7-6d85-4c18-9c39-6fb01b9c4f4a', 3);
+INSERT INTO users_projects (id, user, status, project, role) VALUES (1, UNHEX(REPLACE('cbe386e3-3d70-4068-886a-1839ef342ebb', '-', '')), 1, 1, 1);
+INSERT INTO users_projects (id, user, status, project, role) VALUES (2, UNHEX(REPLACE('cbe386e3-3d70-4068-886a-1839ef342ebb', '-', '')), 1, 2, 3);
 
 CREATE TABLE IF NOT EXISTS `tokens_status` (
   `id` INT NOT NULL AUTO_INCREMENT,
