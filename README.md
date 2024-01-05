@@ -1,10 +1,5 @@
 # Authentication Module
 
-![GitHub repo size](https://img.shields.io/github/repo-size/ericksont/template-login-page?style=for-the-badge)
-![GitHub language count](https://img.shields.io/github/languages/count/ericksont/template-login-page?style=for-the-badge)
-![GitHub forks](https://img.shields.io/github/forks/ericksont/template-login-page?style=for-the-badge)
-![Bitbucket open issues](https://img.shields.io/bitbucket/issues/ericksont/template-login-page?style=for-the-badge)
-![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/ericksont/template-login-page?style=for-the-badge)
 
 <img src="img/model.png" alt="Imagem da tela">
 

@@ -38,7 +38,7 @@ form {
     padding: 24px;
     position: relative;
     min-height: 500px;
-    background-image: url('/images/login-bg-01.jpg');
+    background-image: url('../images/login-bg-01.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -262,13 +262,11 @@ form input[type="password"] {
     right: 0;
     bottom: 0;
     left: 0;
-    background: #fff url("/images/loading.gif") no-repeat center center;
+    background: #fff url("../images/loading.gif") no-repeat center center;
     opacity: .75;
     filter: alpha(opacity=75);
     z-index: 20140628;
 }
-
-
 
 @media (max-width: 650px) {
     
@@ -281,3 +279,151 @@ form input[type="password"] {
     }
     
 }
+
+/** PNotify **/
+.alert-success {
+    color: #ffffff;
+    background-color: rgba(38, 185, 154, 0.88);
+    border-color: rgba(38, 185, 154, 0.88); }
+  
+  .alert-info {
+    color: #E9EDEF;
+    background-color: rgba(52, 152, 219, 0.88);
+    border-color: rgba(52, 152, 219, 0.88); }
+  
+  .alert-warning {
+    color: #E9EDEF;
+    background-color: rgba(243, 156, 18, 0.88);
+    border-color: rgba(243, 156, 18, 0.88); }
+  
+  .alert-danger,
+  .alert-error {
+    color: #E9EDEF;
+    background-color: rgba(231, 76, 60, 0.88);
+    border-color: rgba(231, 76, 60, 0.88); }
+  
+  .ui-pnotify.dark .ui-pnotify-container {
+    color: #E9EDEF;
+    background-color: rgba(52, 73, 94, 0.88);
+    border-color: rgba(52, 73, 94, 0.88); }
+  
+  .custom-notifications {
+    position: fixed;
+    margin: 15px;
+    right: 0;
+    float: right;
+    width: 400px;
+    z-index: 4000;
+    bottom: 0; }
+  
+  ul.notifications {
+    float: right;
+    display: block;
+    margin-bottom: 7px;
+    padding: 0;
+    width: 100%; }
+  
+  .notifications li {
+    float: right;
+    margin: 3px;
+    width: 36px;
+    -webkit-box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
+            box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3); }
+  
+  .notifications li:last-child {
+    margin-left: 0; }
+  
+  .notifications a {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 9px 8px; }
+  
+  .tabbed_notifications .text {
+    padding: 5px 15px;
+    height: 140px;
+    border-radius: 7px;
+    -webkit-box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.3);
+            box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.3); }
+  
+  .tabbed_notifications div p {
+    display: inline-block; }
+  
+  .tabbed_notifications h2 {
+    font-weight: bold;
+    text-transform: uppercase;
+    width: 80%;
+    float: left;
+    height: 20px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: block; }
+  
+  .tabbed_notifications .close {
+    padding: 5px;
+    color: #E9EDEF;
+    float: right;
+    opacity: 1; }
+  
+  .join-btn {
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+    pointer-events: none; }
+  
+  .go-class {
+    margin-right: 0px; }
+  
+  .input-group-sm > .input-group-addon {
+    height: 30px;
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5; }
+  
+  .input-group-addon {
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    color: #555;
+    text-align: center;
+    background-color: #eee;
+    border: 1px solid #ccc; }
+  
+  .img-circle {
+    border-radius: 50%; }
+  
+  .display-layout {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex; }
+  
+  .profile-bottom {
+    background: #F2F5F7;
+    padding: 9px 0;
+    border-top: 1px solid #E6E9ED; }
+  
+  @media (min-width: 360px) and (max-width: 812px) {
+    .info-number .badge {
+      font-size: 10px;
+      font-weight: normal;
+      line-height: 13px;
+      padding: 2px 6px;
+      position: absolute;
+      right: 135px;
+      top: 7px; }
+    .tile, .graph {
+      zoom: 71%;
+      height: inherit; } }
+  
+  @media (min-width: 768px) and (max-width: 1024px) {
+    .info-number .badge {
+      font-size: 10px;
+      font-weight: normal;
+      line-height: 13px;
+      padding: 2px 6px;
+      position: absolute;
+      right: -2px;
+      top: -6px; } }
+  
+  /** /PNotify **/
