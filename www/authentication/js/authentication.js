@@ -45,8 +45,7 @@ class  Authentication {
 				} else {
 					throw new Error(response.status);
 				}
-			})
-			.then(function(data) {
+			}).then(function(data) {
 
 				obj = data;
 				
@@ -73,10 +72,8 @@ class  Authentication {
 			})
 			
 		}
-		
 	}
 
-	
 }
 
 const authentication = new Authentication();

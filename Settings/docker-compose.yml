@@ -12,6 +12,8 @@ services:
     - "80:80"
     volumes:
     - "../www:/var/www/html"
+    - "../Library:/var/www/Library"
+    - "../Mocks:/var/www/html/mocks"
     - "./apache/000-default.conf:/etc/apache2/sites-available/000-default.conf"
     - "./apache/apache2.conf:/etc/apache2/apache2.conf"
     restart: always

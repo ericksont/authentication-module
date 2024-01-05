@@ -1,6 +1,4 @@
-<?php
-    require_once '';
-?>
+<?php $ENVIRONMENT = parse_ini_file('/var/www/Library/Authentication/.env'); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,7 +70,7 @@
     <script src="js/authentication.js"></script>
 
     <script>
-        
+        const API = '<?php print $ENVIRONMENT['API'] ?>'
     </script>
 
     <!--<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
