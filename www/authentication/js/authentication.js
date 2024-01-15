@@ -13,11 +13,6 @@ class  Authentication {
 		if(user == '' || pass == ''){
 
 			alert('Preencha corretamente os campos!')
-			/*new PNotify({
-				title: 'Aviso!',
-				text: 'Preencha corretamente os campos!',
-				styling: 'bootstrap3'
-			});*/
 			for (let item of loading) {
 				item.style.display = 'none'
 			}
@@ -59,16 +54,16 @@ class  Authentication {
 					
 					window.location = DASHBOARD;
 				} else {
-					objUtils.message('Aviso!', obj.message, '');
-					$('.loading_login_form').hide();
+					alert(obj.message)
+					for (let item of loading) {
+						item.style.display = 'none'
+					}
 				}
 			}).catch(() => {
-				new PNotify({
-					title: 'Aviso!',
-					text: 'Falha ao conectar com o sistema! \n Aguarde alguns instantes e tente novamente!',
-					styling: 'bootstrap3'
-				});
-				$('.loading_login_form').hide()
+				alert('Falha ao conectar com o sistema! \n Aguarde alguns instantes e tente novamente!')
+				for (let item of loading) {
+					item.style.display = 'none'
+				}
 			})
 			
 		}

@@ -2,5 +2,3 @@ FROM php:7.4-apache AS development
 
 RUN a2enmod rewrite
 RUN a2enmod headers
-
-FROM mariadb:10.5.16 AS mariadb

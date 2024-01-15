@@ -13,48 +13,12 @@ services:
     volumes:
     - "../www:/var/www/html"
     - "../Library:/var/www/Library"
-    - "../Mocks:/var/www/html/mocks"
     - "./apache/000-default.conf:/etc/apache2/sites-available/000-default.conf"
     - "./apache/apache2.conf:/etc/apache2/apache2.conf"
     restart: always
     networks:
       authentication-module:
         ipv4_address: 172.100.0.2
-
-  #user-db:
-  #  image: "user-db"
-  #  container_name: "user-db"
-  #  build:
-  #      context: "."
-  #      target: "mariadb"
-  #      dockerfile: "dockerfile"
-  #  environment:
-  #      MYSQL_ROOT_PASSWORD: "abcd1234"
-  #      MYSQL_DATABASE: "user"
-  #      MYSQL_USER: "custom"
-  #      MYSQL_PASSWORD: "abcd1234"
-  #  ports:
-  #      - "3306:3036"
-  #  volumes:
-  #      - "../Database/Script:/docker-entrypoint-initdb.d"
-  #  restart: always
-  #  networks:
-  #    authentication-module:
-  #      ipv4_address: 172.201.0.3
-
-  #phpmyadmin:
-  #  image: phpmyadmin/phpmyadmin
-  #  links: 
-  #    - user-db:db
-  #  ports:
-  #    - 8000:80
-  #  environment:
-  #    MYSQL_USER: root
-  #    MYSQL_PASSWORD: abcd1234
-  #    MYSQL_ROOT_PASSWORD: abcd1234
-  #  networks:
-  #    user-module:
-  #      ipv4_address: 172.201.0.4   
 
 networks:
   authentication-module:
