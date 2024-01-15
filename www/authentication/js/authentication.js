@@ -1,8 +1,9 @@
-class  Authentication {
+class Authentication {
 		
 	login = _ => {
 		
 		let loading = document.getElementsByClassName('loading')
+
 		for (let item of loading) {
 			item.style.display = 'block'
 		}

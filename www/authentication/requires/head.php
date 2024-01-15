@@ -1,3 +1,5 @@
+<?php $ENVIRONMENT = parse_ini_file('/var/www/Library/Authentication/.dev.env'); ?>
+
 <head>
     
     <meta charset="UTF-8">
