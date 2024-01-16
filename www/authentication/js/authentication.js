@@ -1,73 +1,49 @@
 class Authentication {
 		
-	login = _ => {
-		
-		let loading = document.getElementsByClassName('loading')
+	login = async _ => {
 
-		for (let item of loading) {
-			item.style.display = 'block'
+		loading.show()
+				
+		const data = this.checkData()		
+
+		if(data.status) {
+
+			
+			let obj = await request.load(API+"authentication/login", "POST", data)
+			
+			if(obj !== undefined && obj.type == "SUCCESS"){
+
+				const cookieName = 'SSID_U';
+				const cookieValue = obj.data;
+
+				let myDate = new Date();
+				myDate.setHours(myDate.getHours() + 12);
+
+				document.cookie = cookieName +"=" + cookieValue + ";expires=" + myDate + ";domain=."+DOMAIN+";path=/";
+				
+				//window.location = DASHBOARD;
+			} 
 		}
-		
-		var user = document.getElementById("user").value
-		var pass = document.getElementById("pass").value 
-		
+	}
+
+	checkData = _ => {
+
+		let user = document.getElementById("user").value
+		let pass = document.getElementById("pass").value 
+		let result = {email:user, password:pass}
+
 		if(user == '' || pass == ''){
 
 			alert('Preencha corretamente os campos!')
-			for (let item of loading) {
-				item.style.display = 'none'
-			}
+			loading.hide()
+			result.status = false
+			return result
 			
 		} else {
-
-			var data = {
-				email: user,
-				password: pass
-			};
-			
-			var headers = new Headers();
-			headers.append("Content-Type", "application/json");
-
-			fetch(API+"authentication/login", {
-				method: "POST",
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(data)
-			}).then(function(response) {
-				if (response.ok) {
-					return response.json();
-				} else {
-					throw new Error(response.status);
-				}
-			}).then(function(data) {
-
-				obj = data;
-				
-				if(obj.type == "SUCCESS"){
-
-					var cookieName = 'SSID_U';
-					var cookieValue = obj.data;
-					var myDate = new Date();
-					myDate.setHours(myDate.getHours() + 12);
-					document.cookie = cookieName +"=" + cookieValue + ";expires=" + myDate + ";domain=."+DOMAIN+";path=/";
-					
-					window.location = DASHBOARD;
-				} else {
-					alert(obj.message)
-					for (let item of loading) {
-						item.style.display = 'none'
-					}
-				}
-			}).catch(() => {
-				alert('Falha ao conectar com o sistema! \n Aguarde alguns instantes e tente novamente!')
-				for (let item of loading) {
-					item.style.display = 'none'
-				}
-			})
-			
+			result.status = true
+			return result
 		}
+
 	}
 
 }
