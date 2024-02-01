@@ -16,6 +16,14 @@ services:
     - "../Library:/var/www/Library"
     - "./apache/000-default.conf:/etc/apache2/sites-available/000-default.conf"
     - "./apache/apache2.conf:/etc/apache2/apache2.conf"
+    environment:
+      DOMAIN: "http://localhost/"
+      API: "http://localhost/api/"
+      LIBRARY: "/var/www/Library/"
+      DB: "/var/www/Library/Commons/Db/Db.php"
+      SHOW_ERROR: 1
+      SHOW_SQL: 1
+      JWT_KEY: '1J7Z9eEVWzUUo0X3^%1LP12x6j%FI4Y5u4f9X@0X3%1LP12x6Fz@oReLQDcb'
     restart: always
     networks:
       authentication-module:

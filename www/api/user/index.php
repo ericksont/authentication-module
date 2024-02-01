@@ -1,12 +1,9 @@
 <?php 
 
-$ENVIRONMENT = parse_ini_file('/home/dsousa/library/User/.prod.env');
-
-require_once "/home/dsousa/library/Commons/Conf/conf.php";
-require_once LIBRARY."UserSession/Controllers/UserSessionController.php";
+$ENVIRONMENT = parse_ini_file($_ENV['LIBRARY'].'User/.dev.env');
+require_once "/var/www/Library/Commons/Conf/conf.php";
 
 header('Content-Type: application/json');
-
 
 define("ACTION", $_REQUEST["action"] ?? '');
 

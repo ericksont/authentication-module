@@ -3,10 +3,8 @@
 date_default_timezone_set("America/Fortaleza");
 session_status() !== PHP_SESSION_ACTIVE ? session_start() : null;
 
-$ENVIRONMENT_DEFAULT = parse_ini_file('.env');
-
-define("SHOW_ERROR", $ENVIRONMENT_DEFAULT["SHOW_ERROR"]);
-define("SHOW_SQL", $ENVIRONMENT_DEFAULT["SHOW_SQL"]);
+define("SHOW_ERROR", $_ENV["SHOW_ERROR"]);
+define("SHOW_SQL", $_ENV["SHOW_SQL"]);
 
 if(SHOW_ERROR == "1"){
 	ini_set("display_errors",1);
@@ -14,13 +12,13 @@ if(SHOW_ERROR == "1"){
 	error_reporting(E_ALL);
 }
 
-define("JWT_KEY", $ENVIRONMENT_DEFAULT["JWT_KEY"]);
+define("JWT_KEY", $_ENV["JWT_KEY"]);
 
 /** PATHS */
-define("DOMAIN", $ENVIRONMENT_DEFAULT["DOMAIN"]);
-define("API", $ENVIRONMENT_DEFAULT["API"]);
-define("DB", $ENVIRONMENT_DEFAULT["DB"]);
-define("LIBRARY", $ENVIRONMENT_DEFAULT["LIBRARY"]);
+define("DOMAIN", $_ENV["DOMAIN"]);
+define("API", $_ENV["API"]);
+define("DB", $_ENV["DB"]);
+define("LIBRARY", $_ENV["LIBRARY"]);
 
 if(isset($ENVIRONMENT)){
 
