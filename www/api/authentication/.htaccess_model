@@ -1,0 +1,32 @@
+# Configuração de políticas de CORS
+Header set Access-Control-Allow-Origin "http://localhost"
+Header set Access-Control-Allow-Methods "GET, POST, OPTIONS, DELETE, PUT"
+Header set Access-Control-Allow-Headers "Authorization"
+
+# Ativa o mecanismo de reescrita
+RewriteEngine On
+
+# Define a base para todas as regras de reescrita
+RewriteBase /authentication/
+
+# Reescreve as URLs para o arquivo index.php
+RewriteCond %{REQUEST_FILENAME} !-s
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)/?$ index.php?action=$1 [QSA,L]
+
+# Define a variável de ambiente "HTTP_AUTHORIZATION" com o valor do cabeçalho HTTP "Authorization"
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+# Bloqueia solicitações com potenciais ataques de script
+RewriteCond %{QUERY_STRING} (<|%3C).*script.*(>|%3E) [NC,OR]
+RewriteCond %{QUERY_STRING} GLOBALS(=|[|%[0-9A-Z]{0,2}) [OR]
+RewriteCond %{QUERY_STRING} _REQUEST(=|[|%[0-9A-Z]{0,2})
+RewriteRule .* - [F]
+
+# Configura cabeçalhos de segurança adicionais (se o módulo mod_headers estiver habilitado)
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-XSS-Protection "1; mode=block"
+</IfModule>

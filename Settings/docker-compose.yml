@@ -1,6 +1,7 @@
 version: '3.9'
 
 services:
+
   authentication-module:
     image: "authentication-module"
     container_name: "authentication-module"
@@ -20,6 +21,38 @@ services:
       authentication-module:
         ipv4_address: 172.100.0.2
 
+  user-db:
+    image: mariadb:10.5.16
+    container_name: "user-db"
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "users"
+      MYSQL_USER: "user"
+      MYSQL_PASSWORD: "root"
+    ports:
+      - 3306:3306
+    volumes:
+      - ../Database/User/Data:/var/lib/mysql
+      - ../Database/User/Data/mysql-dump:/docker-entrypoint-initdb.d
+    restart: always
+    networks:
+      authentication-module:
+        ipv4_address: 172.100.0.3
+  
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links: 
+      - user-db:db
+    ports:
+      - '8080:80'
+    environment:
+      MYSQL_USER: "authentication"
+      MYSQL_PASSWORD: "root"
+      MYSQL_ROOT_PASSWORD: "root"
+    networks:
+      authentication-module:
+        ipv4_address: 172.100.0.4
+  
 networks:
   authentication-module:
     driver: bridge
