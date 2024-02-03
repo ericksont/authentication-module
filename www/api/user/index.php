@@ -1,7 +1,7 @@
 <?php 
 
 $ENVIRONMENT = parse_ini_file($_ENV['LIBRARY'].'User/.dev.env');
-require_once "/var/www/Library/Commons/Conf/conf.php";
+require_once $_ENV['LIBRARY']."Commons/Conf/conf.php";
 
 header('Content-Type: application/json');
 

@@ -10,7 +10,7 @@ class UserController {
             return Response::obj("ERROR","Você já fez essa solicitação!");
 
         $service = new UserService();
-        return $service->login($data);
+        return $service->readByUser($data);
     }
 
 }
