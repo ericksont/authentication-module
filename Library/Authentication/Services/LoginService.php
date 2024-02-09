@@ -14,10 +14,8 @@ class LoginService {
 
             $token = $this->generateToken();
             $APIResult = $this->verifyUser($user, $pass, $token);
-            
-            $checkBrutalForce = $this->checkBrutalForce($user, $APIResult);
-            
-            if($APIResult->type === "SUCCESS" && $checkBrutalForce === false) {
+                        
+            if($APIResult->type === "SUCCESS") {
 
                 var_dump($APIResult->data);
                 
@@ -28,8 +26,8 @@ class LoginService {
 
 
                 // senão tiver sessão ou se a sessão não for mais valida
-                // Verificar se projeto exige 2 step authentication e gerar codigo de 4 digitos e validar os 4 digitos
-                //$twoFactorService = new TwoFactorAuthenticationService();
+                
+                
                 
                 
                 
@@ -49,34 +47,6 @@ class LoginService {
 		
     }
 
-    function checkBrutalForce($user, $APIResult) {
-        if($APIResult->type === "ERROR"){
-
-            if(!isset($_SESSION["login"]["count"])) 
-                $_SESSION["login"]["count"] = 0;
-
-            if($this->attempts > $_SESSION["login"]["count"]){
-
-                $time = isset($_SESSION["login"]["time"]) ? $_SESSION["login"]["time"] : new DateTime('now +1 hour');
-
-                $checkTime = new DateTime('now') <= $time;
-
-                if(!$checkTime)
-                    $_SESSION["login"]["count"] = 0;
-
-                $_SESSION["login"]["time"] = $time;
-                $_SESSION["login"]["user"] = $user;
-                $_SESSION["login"]["count"] = $_SESSION["login"]["count"] + 1;
-                
-            } else {
-                //var_dump("Bloquear senha"); // vai na api de usuários para bloquear senha
-                //var_dump($user);
-            }
-            return true;
-        }
-        return false;
-    }
-
     private function generateToken() {
         $payloadData = [
             'sub' => 'authentication',
@@ -90,18 +60,6 @@ class LoginService {
     private function verifyUser($user, $pass, $token){
         $result = Request::api('GET',API.'user/login',$token,['user'=>$user]);
         $dbpass = json_decode($result->data)->data !== "" ? json_decode($result->data)->data->password : "";
-        $verify = password_verify($pass, $dbpass) ? true : false;
-
-        if($verify === true)
-            $result = Response::obj("SUCCESS","Usuário retornado com sucesso",json_decode($result->data)->data);
-        else
-            $result = Response::obj("ERROR","Usuário não encontrado");
-        return $result;
-    }
-
-    private function lockPassword($user, $token){
-        $result = Request::api('GET',API.'/user/lock_password',$token,['user'=>$user]);
-        $dbpass = json_decode($result->data)->data->password;
         $verify = password_verify($pass, $dbpass) ? true : false;
 
         if($verify === true)
