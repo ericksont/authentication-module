@@ -1,5 +1,7 @@
 <?php 
 
+require_once LIBRARY.MODULE.'/Services/SessionService.php';
+
 class LoginService {
 
     private $attempts = 3;
@@ -20,17 +22,12 @@ class LoginService {
                 var_dump($APIResult->data);
                 
                 // Agora verificar se ja tem alguma sessão em aberto e pega o token...
-                //$session = new SessionController();
-                //$session->loadByUser($APIResult->data);
+                $session = new SessionController();
+                $session->loadByUser($APIResult->data);
 
 
 
                 // senão tiver sessão ou se a sessão não for mais valida
-                
-                
-                
-                
-                
                 // gera o token e grava na tabela de sessões
 
                 $return = Response::obj("SUCCESS","Usuário logou no sistema",$APIResult);

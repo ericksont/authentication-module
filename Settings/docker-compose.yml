@@ -47,8 +47,9 @@ services:
       authentication-module:
         ipv4_address: 172.100.0.3
   
-  phpmyadmin:
+  user-phpmyadmin:
     image: phpmyadmin/phpmyadmin
+    container_name: "user-phpmyadmin"
     links: 
       - user-db:db
     ports:
@@ -60,7 +61,41 @@ services:
     networks:
       authentication-module:
         ipv4_address: 172.100.0.4
+
+  authentication-db:
+    image: mariadb:10.5.16
+    container_name: "authentication-db"
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "authentications"
+      MYSQL_USER: "authentication"
+      MYSQL_PASSWORD: "root"
+    ports:
+      - 3307:3306
+    volumes:
+      - ../Database/Authentication/Data:/var/lib/mysql
+      - ../Database/Authentication/Data/mysql-dump:/docker-entrypoint-initdb.d
+    restart: always
+    networks:
+      authentication-module:
+        ipv4_address: 172.100.0.5
   
+  authentication-phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: "authentication-phpmyadmin"
+    links: 
+      - authentication-db:db
+    ports:
+      - '8081:80'
+    environment:
+      MYSQL_USER: "authentication"
+      MYSQL_PASSWORD: "root"
+      MYSQL_ROOT_PASSWORD: "root"
+      PMA_PORT: 3307
+    networks:
+      authentication-module:
+        ipv4_address: 172.100.0.6
+
 networks:
   authentication-module:
     driver: bridge
