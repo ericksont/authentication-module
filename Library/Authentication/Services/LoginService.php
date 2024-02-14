@@ -14,28 +14,36 @@ class LoginService {
 
         if($user != "" && $pass != "" && $project != ""){
 
-            $token = $this->generateToken();
+            $token = $this->generateToken('AUTHENTICATION');
             $APIResult = $this->verifyUser($user, $pass, $token);
                         
             if($APIResult->type === "SUCCESS") {
 
-                var_dump($APIResult->data);
+                $browser = $_SERVER['HTTP_USER_AGENT'];
                 
-                // Agora verificar se ja tem alguma sessão em aberto e pega o token...
-                $session = new SessionController();
-                $session->loadByUser($APIResult->data);
+                $session = new SessionService();
+                $result = $session->loadByUser($APIResult->data, $browser);
+                $user = $APIResult->data;
+                
+                if($result->type == 'SUCCESS'){
 
+                    unset($user->password);
+                    $return = Response::obj("SUCCESS","Sessão encontrada!", ["user"=>$user, "token"=>$result->data->token]);
 
+                } else if($result->type == 'ALERT'){
+                    
+                    $result = $session->createSession($user, $browser);
+                    
+                    if($result->type == "SUCCESS") {
 
-                // senão tiver sessão ou se a sessão não for mais valida
-                // gera o token e grava na tabela de sessões
+                        unset($user->password);
+                        $return = Response::obj("SUCCESS","Usuário entrou no sistema!", ["user"=>$user, "token"=>$result->data]);
 
-                $return = Response::obj("SUCCESS","Usuário logou no sistema",$APIResult);
+                    } else $return = Response::obj("ERROR","Falha ao cadastrar dados!", $result->data);
+                } else $return = Response::obj("ERROR","Falha ao consultar dados!", $result->data);
 
-            } else if ($this->attempts <= $session) 
-                $return = Response::obj("ERROR","Senha bloqueada por excesso de tentativas!",["tentativa"=>$session,"total_tentativas"=>$this->attempts]);
-            else
-                $return = Response::obj("ERROR","Usuário e senha inválidos!",["tentativa"=>$session,"total_tentativas"=>$this->attempts]);
+            } else
+                $return = Response::obj("ERROR","Usuário e senha inválidos!");
 
         } else 
             $return = Response::obj("ERROR","Campos obrigatórios não preenchidos",$data);
@@ -44,10 +52,10 @@ class LoginService {
 		
     }
 
-    private function generateToken() {
+    private function generateToken($project) {
         $payloadData = [
             'sub' => 'authentication',
-            'projects' => 'AUTHENTICATION',
+            'projects' => $project,
             'roles' => 'LOGIN',
             'exp' => time() + 60
         ];
