@@ -4,5 +4,5 @@
 
 <script>
     document.title = document.title + ' | Autenticação '
-    const API = '<?php print $ENVIRONMENT['API'] ?>'
+    const API = '<?php print $_ENV['API'] ?>'
 </script>
